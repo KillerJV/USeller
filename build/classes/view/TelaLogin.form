@@ -56,23 +56,17 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
-                              <Component id="txtUser" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtPassword" alignment="1" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
+                      <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
+                      <Component id="txtUser" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtPassword" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -185,6 +179,9 @@
               <Image iconType="3" name="/icon/icons8-mais-48.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewLoginActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

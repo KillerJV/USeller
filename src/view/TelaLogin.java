@@ -11,6 +11,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import model.Login;
+import model.Professional;
 import service.LoginService;
 import util.JpaUtil;
 
@@ -75,26 +76,27 @@ public class TelaLogin extends javax.swing.JFrame {
         btnExit.setText("Fechar");
 
         btnNewLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-mais-48.png"))); // NOI18N
+        btnNewLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewLoginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtUser)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtUser)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -163,16 +165,12 @@ public class TelaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         Login login = new Login();
         LoginService ls = new LoginService();
+        Professional p = new Professional();
+        
         login.setUser(txtUser.getText());
         login.setPassword(txtPassword.getText());
-        /*
-         List<Login> l = ls.findLogin();
-         if(login.getUser().equals(l.size()) && l.equals(login.getPassword())){
-         JOptionPane.showMessageDialog(null, "\t\t\tLogado!!!");
-         }else{
-         JOptionPane.showMessageDialog(null, "Usuário ou senha INCORRETO");
-         }
-         */
+        login.setProfessional(p);
+        
         for (Login l : ls.findLogin()) {
             if (login.getUser().equals(l.getUser()) && login.getPassword().equals(l.getPassword())) {
                 JOptionPane.showMessageDialog(null, "\t\t\t\t\t\t\nLogado!!!");
@@ -192,6 +190,16 @@ public class TelaLogin extends javax.swing.JFrame {
         txtPassword.setText("");
 
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnNewLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewLoginActionPerformed
+        // TODO add your handling code here:
+        
+        TelaCadNewLogin tcnl = new TelaCadNewLogin();
+        tcnl.setVisible(true);
+        tcnl.setResizable(false);
+        dispose();
+        
+    }//GEN-LAST:event_btnNewLoginActionPerformed
 
     /**
      * @param args the command line arguments

@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import lombok.Data;
 
 /**
@@ -30,6 +31,9 @@ public class Login implements Serializable {
     private String user;
     
     private String password;
+    
+    @OneToOne
+    private Professional professional;
 
     @Override
     public int hashCode() {
