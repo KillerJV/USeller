@@ -8,7 +8,6 @@ package service;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
 import model.Login;
 import util.JpaUtil;
 
@@ -17,6 +16,15 @@ import util.JpaUtil;
  * @author E-Commerce
  */
 public class LoginService {
+    
+    public void saveLogin(Login login){
+        EntityManager manager = JpaUtil.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+        
+        manager.persist(login);
+        tx.commit();
+    }
 
     public List<Login> findLogin() {
         EntityManager manager = JpaUtil.getEntityManager();

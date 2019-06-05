@@ -8,10 +8,8 @@ package preload;
 
 import java.time.Instant;
 import java.util.Date;
-import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import lombok.extern.slf4j.Slf4j;
 import model.Customer;
 import model.Login;
 import model.Product;
@@ -24,11 +22,12 @@ import util.JpaUtil;
  *
  * @author E-Commerce
  */
-@Slf4j
+
 public class InitialPreLoad {
     
-    @PostConstruct
+    
     public void initialDB(){
+        
         EntityManager manager = JpaUtil.getEntityManager();
         EntityTransaction tx = manager.getTransaction();
         tx.begin();

@@ -51,6 +51,9 @@ public class Professional implements Serializable {
     
     @OneToMany
     private Set<Salesman> salesmansList = new HashSet<>();
+    
+    @OneToOne
+    private Login login;
 
     @Override
     public int hashCode() {
