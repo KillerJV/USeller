@@ -5,16 +5,6 @@
  */
 package view;
 
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
-import javax.swing.JOptionPane;
-import model.Login;
-import model.Professional;
-import service.LoginService;
-import util.JpaUtil;
-
 /**
  *
  * @author E-Commerce
@@ -163,32 +153,6 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        Login login = new Login();
-        LoginService ls = new LoginService();
-        Professional p = new Professional();
-        
-        login.setUser(txtUser.getText());
-        login.setPassword(txtPassword.getText());
-        login.setProfessional(p);
-        
-        for (Login l : ls.findLogin()) {
-            if (login.getUser().equals(l.getUser()) && login.getPassword().equals(l.getPassword())) {
-                JOptionPane.showMessageDialog(null, "\t\t\t\t\t\t\nLogado!!!");
-                TelaPrincipal tp = new TelaPrincipal();
-                tp.setVisible(true);
-                tp.setResizable(false);
-                
-                break;
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuário ou senha INCORRETO");
-                break;
-                
-            }
-            
-        }
-        txtUser.setText("");
-        txtPassword.setText("");
-
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnNewLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewLoginActionPerformed
