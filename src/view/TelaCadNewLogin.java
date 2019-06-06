@@ -5,16 +5,6 @@
  */
 package view;
 
-import java.util.Date;
-import java.time.Instant;
-import javax.persistence.EntityManager;
-import javax.swing.JOptionPane;
-import model.Login;
-import model.Professional;
-import service.LoginService;
-import service.ProfessionalService;
-import util.JpaUtil;
-
 /**
  *
  * @author E-Commerce
@@ -265,43 +255,6 @@ public class TelaCadNewLogin extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        EntityManager manager = JpaUtil.getEntityManager();
-        ProfessionalService professionalService = new ProfessionalService();
-        LoginService loginService = new LoginService();
-        
-        Date now = (Date) Date.from(Instant.now());
-        Professional professional = new Professional();
-        
-        Login login = new Login();
-        
-        login.setUser(txtUser.getText());
-        login.setPassword(txtPassword.getText());
-        
-        
-        
-        professional.setNameProfessional(txtName.getText());
-        professional.setCpf(txtCpf.getText());
-        professional.setService(txtCargo.getText());
-        professional.setOfficeHour(txtExpediente.getText());
-        professional.setDateRegister(now);
-        professional.setPhone(txtPhone.getText());
-        professional.setEmail(txtEmail.getText());
-        
-        professional.setLogin(login);
-        login.setProfessional(professional);
-        
-        professionalService.save(professional);
-        loginService.saveLogin(login);
-        
-        if(professional.getLogin() != null && login.getProfessional() != null){
-            JOptionPane.showMessageDialog(null, "Funcionario cadastrado com sucesso.");
-            TelaLogin telaLogin = new TelaLogin();
-            telaLogin.setVisible(true);
-            dispose();
-        }else{
-            JOptionPane.showMessageDialog(null, "Erro na atribuição!!!");
-        }
-        JOptionPane.showMessageDialog(null, "" + login.getProfessional().getIdProfessional() + ", " + professional.getLogin().getIdLong());
         
     }//GEN-LAST:event_btnSaveActionPerformed
 
