@@ -7,9 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -37,6 +35,7 @@ public class Professional implements Serializable {
     
     private String officeHour;
 
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateRegister;
 
     @Column(length = 60, nullable = false)
@@ -45,14 +44,8 @@ public class Professional implements Serializable {
     @Column(length = 100, nullable = false)
     private String email;
     
-    @Transient
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "professional")
-    private Set<Sale> saleCollection = new HashSet<>();
-    
-    @OneToMany
-    private Set<Salesman> salesmansList = new HashSet<>();
-    
-    @OneToOne
+    @OneToOne(mappedBy = "professional", cascade = CascadeType.ALL, 
+       fetch = FetchType.LAZY, optional = true)
     private Login login;
 
     @Override

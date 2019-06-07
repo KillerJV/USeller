@@ -8,13 +8,13 @@ package dao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import model.Professional;
+import model.Login;
 
 /**
  *
  * @author E-Commerce
  */
-public class ProfessionalDAO {
+public class LoginDAO {
 
     private EntityManager getEntityManager() {
         EntityManagerFactory factory = null;
@@ -23,31 +23,32 @@ public class ProfessionalDAO {
             factory = Persistence.createEntityManagerFactory("ProjetoPU");
             entityManager = factory.createEntityManager();
         } finally {
-            //entityManager.close();
+            //factory.close();
         }
         return entityManager;
     }
 
-    public Professional salvar(Professional professional) {
+    public Login salvar(Login login) {
         EntityManager entityManager = getEntityManager();
-        
+
+        try {
             entityManager.getTransaction().begin();
 
             System.out.println("Salvando dados do profissional!");
 
-            if (professional.getIdProfessional() == null) {
-                entityManager.persist(professional);
+            if (login.getIdLogin() == null) {
+                entityManager.persist(login);
             } else {
-                professional = entityManager.merge(professional);
+                login = entityManager.merge(login);
             }
-
             //entityManager.flush();
             entityManager.getTransaction().commit();
-        
+            
+        } finally {
             //entityManager.close();
-        
+        }
 
-        return professional;
+        return login;
     }
 
     public void excluir(Long id) {
@@ -56,27 +57,27 @@ public class ProfessionalDAO {
             // Inicia uma transação com o banco de dados.
             entityManager.getTransaction().begin();
             // Consulta a pessoa na base de dados através do seu ID.
-            Professional professional = entityManager.find(Professional.class, id);
-            System.out.println("Excluindo os dados de: " + professional.getNameProfessional());
+            Login login = entityManager.find(Login.class, id);
+            System.out.println("Excluindo os dados de: " + login.getUserLogin());
             // Remove a pessoa da base de dados.
-            entityManager.remove(professional);
+            entityManager.remove(login);
             // Finaliza a transação.
             entityManager.getTransaction().commit();
         } finally {
-            //entityManager.close();
+            entityManager.close();
         }
     }
 
-    public Professional consultarPorId(Long id) {
+    public Login consultarPorId(Long id) {
         EntityManager entityManager = getEntityManager();
-        Professional professional = null;
+        Login login = null;
         try {
             //Consulta uma pessoa pelo seu ID.
-            professional = entityManager.find(Professional.class, id);
+            login = entityManager.find(Login.class, id);
         } finally {
-            //entityManager.close();
+            entityManager.close();
         }
-        return professional;
+        return login;
     }
 
 }
