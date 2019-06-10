@@ -1,10 +1,7 @@
 package principal;
 
-import dao.ProfessionalDAO;
-import java.time.Instant;
-import java.util.Date;
-import javax.swing.JOptionPane;
-import model.Professional;
+import preload.PreloadConfig;
+import view.TelaLogin;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,19 +18,12 @@ public class SysSeller {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        Professional p = new Professional();
-        Date now = Date.from(Instant.now());
-        p.setNameProfessional("TestName666");
-        //p.setIdProfessional(1L);
-        p.setCpf("TestCpf");
-        p.setEmail("TestEmail");
-        p.setPhone("TestPhone");
-        p.setDateRegister(now);
-        p.setOfficeHour("Free");
+        TelaLogin login = new TelaLogin();
+        login.setVisible(true);
         
-        ProfessionalDAO pdao = new ProfessionalDAO();
-        JOptionPane.showMessageDialog(null, "Salvando pessoa");
-        p = pdao.salvar(p);
+        PreloadConfig config = new PreloadConfig();
+        config.initialConfig();
+        
+        
     }
 }

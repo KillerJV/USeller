@@ -5,6 +5,12 @@
  */
 package view;
 
+import dao.LoginJpaDAO;
+import dao.ProfessionalJpaDAO;
+import javax.swing.JOptionPane;
+import model.Login;
+import model.Professional;
+
 /**
  *
  * @author E-Commerce
@@ -255,6 +261,31 @@ public class TelaCadNewLogin extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+        Professional p = new Professional();
+        Login l = new Login();
+        
+        ProfessionalJpaDAO professionalJpaDAO = ProfessionalJpaDAO.getInstance();
+        LoginJpaDAO loginJpaDAO = LoginJpaDAO.getInstance();
+        
+        p.setNameProfessional(txtName.getText());
+        p.setCpf(txtCpf.getText());
+        p.setService(txtCargo.getText());
+        p.setOfficeHour(txtExpediente.getText());
+        p.setPhone(txtPhone.getText());
+        p.setEmail(txtEmail.getText());
+        
+        
+        
+        l.setUserLogin(txtUser.getText());
+        l.setPassword(txtPassword.getText());
+        
+        l.setProfessional(p);
+        p.setLogin(l);
+        
+        professionalJpaDAO.persist(p);
+        loginJpaDAO.persist(l);
+        
+        JOptionPane.showMessageDialog(this, "Salvo com sucesso !");
         
     }//GEN-LAST:event_btnSaveActionPerformed
 

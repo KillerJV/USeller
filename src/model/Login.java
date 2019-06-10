@@ -8,6 +8,7 @@ package model;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,19 +27,19 @@ public class Login implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idLong;
+    private Long idLogin;
     
-    private String user;
+    private String userLogin;
     
     private String password;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Professional professional;
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 17 * hash + Objects.hashCode(this.idLong);
+        hash = 17 * hash + Objects.hashCode(this.idLogin);
         return hash;
     }
 
@@ -51,7 +52,7 @@ public class Login implements Serializable {
             return false;
         }
         final Login other = (Login) obj;
-        if (!Objects.equals(this.idLong, other.idLong)) {
+        if (!Objects.equals(this.idLogin, other.idLogin)) {
             return false;
         }
         return true;
@@ -59,6 +60,6 @@ public class Login implements Serializable {
 
     @Override
     public String toString() {
-        return "Login{" + "login=" + user + ", password=" + password + '}';
+        return "Login{" + "login=" + userLogin + ", password=" + password + '}';
     }
 }
