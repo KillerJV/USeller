@@ -20,9 +20,9 @@ import model.Professional;
 public class PreloadConfig {
 
     public void initialConfig() {
-
+/*<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
         Professional p = new Professional();
-        
+
         Login login = new Login();
         ProfessionalJpaDAO pdao1 = ProfessionalJpaDAO.getInstance();
         LoginJpaDAO dAO = LoginJpaDAO.getInstance();
@@ -37,16 +37,15 @@ public class PreloadConfig {
         p.setOfficeHour("Free");
         p.setService("vendante");
 
-        pdao1.persist(p);
-
         login.setUserLogin("killer");
         login.setPassword("123666");
 
         login.setProfessional(p);
         p.setLogin(login);
-
-        JOptionPane.showMessageDialog(null, "Salvando pessoa");
-
+        pdao1.persist(p);
         dAO.persist(login);
+        JOptionPane.showMessageDialog(null, "Salvando pessoa");
+*/
     }
+        
 }

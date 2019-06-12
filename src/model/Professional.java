@@ -44,8 +44,7 @@ public class Professional implements Serializable {
     @Column(length = 100, nullable = false)
     private String email;
     
-    @OneToOne(mappedBy = "professional", cascade = CascadeType.ALL, 
-       fetch = FetchType.LAZY, optional = true)
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
     private Login login;
 
     @Override

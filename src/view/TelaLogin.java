@@ -5,6 +5,13 @@
  */
 package view;
 
+import dao.LoginJpaDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Login;
+
 /**
  *
  * @author E-Commerce
@@ -152,17 +159,39 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            
+            LoginJpaDAO ljdao = LoginJpaDAO.getInstance();
+            Login l = new Login();
+            
+            l.setUserLogin(txtUser.getText());
+            l.setPassword(txtPassword.getText());
+            
+            
+            if(ljdao.consultar(l.getUserLogin(), l.getPassword()).equals(l)){
+                TelaPrincipal principal = new TelaPrincipal();
+                principal.setVisible(true);
+                dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "USUARIO E SENHA INCORRETOS!");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnNewLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewLoginActionPerformed
         // TODO add your handling code here:
-        
+
         TelaCadNewLogin tcnl = new TelaCadNewLogin();
         tcnl.setVisible(true);
         tcnl.setResizable(false);
         dispose();
-        
+
     }//GEN-LAST:event_btnNewLoginActionPerformed
 
     /**

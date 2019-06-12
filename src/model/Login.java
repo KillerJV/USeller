@@ -7,11 +7,13 @@ package model;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import lombok.Data;
 
@@ -33,7 +35,9 @@ public class Login implements Serializable {
     
     private String password;
     
-    @OneToOne(fetch = FetchType.EAGER)
+    
+    @OneToOne(mappedBy = "login")
+    @JoinColumn(name = "idLogin")
     private Professional professional;
 
     @Override
