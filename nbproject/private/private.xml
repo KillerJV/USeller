@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/E-Commerce/Desktop/NewRep/USeller/src/view/TelaCadNewLogin.java</file>
-            <file>file:/C:/Users/E-Commerce/Desktop/NewRep/USeller/src/principal/SysSeller.java</file>
-            <file>file:/C:/Users/E-Commerce/Desktop/NewRep/USeller/src/dao/ProfessionalJpaDAO.java</file>
+            <file>file:/C:/Users/E-Commerce/Desktop/NewRep/USeller/src/dao/LoginJpaDAO.java</file>
+            <file>file:/C:/Users/E-Commerce/Desktop/NewRep/USeller/src/view/TelaLogin.java</file>
+            <file>file:/C:/Users/E-Commerce/Desktop/NewRep/USeller/src/model/Login.java</file>
+            <file>file:/C:/Users/E-Commerce/Desktop/NewRep/USeller/src/META-INF/persistence.xml</file>
+            <file>file:/C:/Users/E-Commerce/Desktop/NewRep/USeller/src/preload/PreloadConfig.java</file>
         </group>
     </open-files>
 </project-private>

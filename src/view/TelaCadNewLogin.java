@@ -7,6 +7,8 @@ package view;
 
 import dao.LoginJpaDAO;
 import dao.ProfessionalJpaDAO;
+import java.time.Instant;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import model.Login;
 import model.Professional;
@@ -267,9 +269,11 @@ public class TelaCadNewLogin extends javax.swing.JFrame {
         ProfessionalJpaDAO professionalJpaDAO = ProfessionalJpaDAO.getInstance();
         LoginJpaDAO loginJpaDAO = LoginJpaDAO.getInstance();
         
+        Date now = Date.from(Instant.now());
         p.setNameProfessional(txtName.getText());
         p.setCpf(txtCpf.getText());
         p.setService(txtCargo.getText());
+        p.setDateRegister(now);
         p.setOfficeHour(txtExpediente.getText());
         p.setPhone(txtPhone.getText());
         p.setEmail(txtEmail.getText());
@@ -283,7 +287,7 @@ public class TelaCadNewLogin extends javax.swing.JFrame {
         p.setLogin(l);
         
         professionalJpaDAO.persist(p);
-        loginJpaDAO.persist(l);
+        loginJpaDAO.merge(l);
         
         JOptionPane.showMessageDialog(this, "Salvo com sucesso !");
         

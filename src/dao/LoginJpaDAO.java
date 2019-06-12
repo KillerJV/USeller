@@ -5,12 +5,19 @@
  */
 package dao;
 
+import com.mysql.jdbc.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.swing.JOptionPane;
 import model.Login;
 import model.Professional;
+import org.hibernate.Session;
 
 /**
  *
@@ -43,8 +50,22 @@ public class LoginJpaDAO {
         return entityManager;
     }
 
-    public Login getById(final int id) {
+    public Login getById(final long id) {
         return entityManager.find(Login.class, id);
+    }
+
+    public Query consultar(String user, String pass) throws SQLException {
+// Manda como parametro para ele duas variaveis para ele procurar no banco de dados!
+
+        Query query = this.entityManager.createNativeQuery("select * from venda.login where userLogin  = ? and password = ?", Login.class);
+        query.setParameter(1, user);
+        query.setParameter(2, pass);
+        List<Login> log = query.getResultList();
+
+        for (Login logins : log) {
+            System.out.println(logins.getUserLogin() + "-" + logins.getPassword());
+        }
+        return query;
     }
 
     @SuppressWarnings("unchecked")
