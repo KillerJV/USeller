@@ -5,19 +5,12 @@
  */
 package dao;
 
-import com.mysql.jdbc.PreparedStatement;
-import java.sql.ResultSet;
+import connection.ConnectionFactory;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import model.Login;
-import model.Professional;
-import org.hibernate.Session;
 
 /**
  *
@@ -25,96 +18,28 @@ import org.hibernate.Session;
  */
 public class LoginJpaDAO {
 
-    private static LoginJpaDAO instance;
-    protected EntityManager entityManager;
+    public void create(Login p) {
+        
+        Connection con = ConnectionFactory.getConnection();
+        
+        PreparedStatement stmt = null;
 
-    public static LoginJpaDAO getInstance() {
-        if (instance == null) {
-            instance = new LoginJpaDAO();
-        }
-
-        return instance;
-    }
-
-    private LoginJpaDAO() {
-        entityManager = getEntityManager();
-    }
-
-    private EntityManager getEntityManager() {
-        EntityManagerFactory factory
-                = Persistence.createEntityManagerFactory("ProjetoPU");
-        if (entityManager == null) {
-            entityManager = factory.createEntityManager();
-        }
-
-        return entityManager;
-    }
-
-    public Login getById(final long id) {
-        return entityManager.find(Login.class, id);
-    }
-
-    public Query consultar(String user, String pass) throws SQLException {
-// Manda como parametro para ele duas variaveis para ele procurar no banco de dados!
-
-        Query query = this.entityManager.createNativeQuery("select * from venda.login where userLogin  = ? and password = ?", Login.class);
-        query.setParameter(1, user);
-        query.setParameter(2, pass);
-        List<Login> log = query.getResultList();
-
-        for (Login logins : log) {
-            System.out.println(logins.getUserLogin() + "-" + logins.getPassword());
-        }
-        return query;
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<Login> findAll() {
-        return entityManager.createQuery("FROM "
-                + Professional.class.getName()).getResultList();
-    }
-
-    public void persist(Login login) {
         try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(login);
-            entityManager.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            entityManager.getTransaction().rollback();
-        }
-    }
+            stmt = con.prepareStatement("INSERT INTO login (userLogin, "
+                            + "password"
+                            + ")VALUES(?,?)");
+            stmt.setString(1, p.getUserLogin());
+            stmt.setString(2, p.getPassword());
+            
 
-    public void merge(Login login) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.merge(login);
-            entityManager.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            entityManager.getTransaction().rollback();
-        }
-    }
+            stmt.execute();
 
-    public void remove(Login login) {
-        try {
-            entityManager.getTransaction().begin();
-            login = entityManager.find(Login.class, login.getIdLogin());
-            entityManager.remove(login);
-            entityManager.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            entityManager.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
         }
+    
     }
-
-    public void removeById(final int id) {
-        try {
-            Login login = getById(id);
-            remove(login);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
 }

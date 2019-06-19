@@ -6,7 +6,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.*;
 import lombok.Data;
@@ -35,6 +35,7 @@ public class Professional implements Serializable {
     
     private String officeHour;
 
+    //@Temporal(value = TemporalType.DATE)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateRegister;
 
@@ -44,7 +45,7 @@ public class Professional implements Serializable {
     @Column(length = 100, nullable = false)
     private String email;
     
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    //@OneToOne(cascade = CascadeType.ALL, optional = true)
     private Login login;
 
     @Override

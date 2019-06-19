@@ -7,6 +7,7 @@ package view;
 
 import dao.LoginJpaDAO;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -159,26 +160,8 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        try {
-            // TODO add your handling code here:
-            
-            LoginJpaDAO ljdao = LoginJpaDAO.getInstance();
-            Login l = new Login();
-            
-            l.setUserLogin(txtUser.getText());
-            l.setPassword(txtPassword.getText());
-            
-            
-            if(ljdao.consultar(l.getUserLogin(), l.getPassword()).equals(l)){
-                TelaPrincipal principal = new TelaPrincipal();
-                principal.setVisible(true);
-                dispose();
-            }else{
-                JOptionPane.showMessageDialog(null, "USUARIO E SENHA INCORRETOS!");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        
         
 
 

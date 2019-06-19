@@ -7,9 +7,7 @@ package view;
 
 import dao.LoginJpaDAO;
 import dao.ProfessionalJpaDAO;
-import java.time.Instant;
-import java.util.Date;
-import javax.swing.JOptionPane;
+import java.sql.Date;
 import model.Login;
 import model.Professional;
 
@@ -264,32 +262,32 @@ public class TelaCadNewLogin extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         Professional p = new Professional();
+        ProfessionalJpaDAO dao = new ProfessionalJpaDAO();
+        
         Login l = new Login();
+        LoginJpaDAO ljdao = new LoginJpaDAO();
+
+        java.util.Date ud = new java.util.Date();
+        Date d =  new Date(ud.getTime());
         
-        ProfessionalJpaDAO professionalJpaDAO = ProfessionalJpaDAO.getInstance();
-        LoginJpaDAO loginJpaDAO = LoginJpaDAO.getInstance();
         
-        Date now = Date.from(Instant.now());
         p.setNameProfessional(txtName.getText());
         p.setCpf(txtCpf.getText());
         p.setService(txtCargo.getText());
-        p.setDateRegister(now);
         p.setOfficeHour(txtExpediente.getText());
+        p.setDateRegister(d);
         p.setPhone(txtPhone.getText());
         p.setEmail(txtEmail.getText());
-        
-        
         
         l.setUserLogin(txtUser.getText());
         l.setPassword(txtPassword.getText());
         
-        l.setProfessional(p);
+        ljdao.create(l);
+        
         p.setLogin(l);
         
-        professionalJpaDAO.persist(p);
-        loginJpaDAO.merge(l);
+        dao.create(p);
         
-        JOptionPane.showMessageDialog(this, "Salvo com sucesso !");
         
     }//GEN-LAST:event_btnSaveActionPerformed
 
