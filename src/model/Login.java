@@ -7,9 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,22 +22,22 @@ import lombok.Data;
 @Data
 @Entity
 public class Login implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idLogin;
-    
-    private String userLogin;
-    
-    private String password;
-    
-    
-    @OneToOne(mappedBy = "login")
-    @JoinColumn(name = "idLogin")
-    private Professional professional;
+    private Integer idLogin;
 
+    private String userLogin;
+
+    private String password;
+
+    /*
+     @OneToOne(mappedBy = "login")
+     @JoinColumn(name = "idLogin")
+     private Professional professional;
+     */
     @Override
     public int hashCode() {
         int hash = 3;
@@ -57,6 +55,12 @@ public class Login implements Serializable {
         }
         final Login other = (Login) obj;
         if (!Objects.equals(this.idLogin, other.idLogin)) {
+            return false;
+        }
+        if (!Objects.equals(this.userLogin, other.userLogin)) {
+            return false;
+        }
+        if (!Objects.equals(this.password, other.password)) {
             return false;
         }
         return true;
